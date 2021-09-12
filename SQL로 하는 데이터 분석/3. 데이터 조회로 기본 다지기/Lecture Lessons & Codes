@@ -61,3 +61,9 @@ SELECT * FROM copang_main.member WHERE age NOT BETWEEN 30 AND 39; -> 30대만 �
 *DATE 타입의 WHERE문 용법 예시
 SELECT * FROM copang_main.member WHERE sign_up_day >= '2019-01-01';
 SELECT * FROM copang_main.member WHERE sign_up_day BETWEEN '2019-01-01' AND '2019-12-31';
+
+*문자열 패턴 매칭
+WHERE address LIKE '서울%'; -> address가 서울로 시작하는 모든 로우 조회
+WHERE address LIKE '%고양시%'; -> address가 고양시를 포함한 모든 로우 조회
+-> %는 임의의 문자열을 의미한다
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
