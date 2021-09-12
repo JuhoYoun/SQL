@@ -271,3 +271,19 @@ SQL 문의 일부분을 한 줄 내리고, 탭을 입력한 후에 쓰는 것도
 
 앞으로 여러분이 배울 영상, 노트, 퀴즈, 과제에서는 상황에 따라 데이터베이스 이름을 테이블 이름 앞에 붙이기도 하고, 붙이지 않기도 할 건데요. 그때그때 상황에 맞게 혼용해서 쓸 거니까 당황하실 필요없이, 어떤 테이블을 가리키는지에만 집중하시면 됩니다. 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*USE copang_main; 은 copang_main이라는 데이터베이스를 사용하겠다고 확실히 선언하는 것입니다. 그리고 그 뒤로는 그냥 테이블 이름만 써도 괜찮습니다. 
+
+*WHERE 쓰는 법들 예시
+SELECT * FROM copang_main.member WHERE age >= 20;
+SELECT * FROM copang_main.member WHERE age BETWEEN 30 AND 39; -> 30대만 조회 -> BETWEEN A AND B 는 A 부터 B 까지를 의미한다 -> A와 B도 포함된다
+SELECT * FROM copang_main.member WHERE age NOT BETWEEN 30 AND 39; -> 30대만 제외하고 조회
+
+*DATE 타입의 WHERE문 용법 예시
+SELECT * FROM copang_main.member WHERE sign_up_day >= '2019-01-01';
+SELECT * FROM copang_main.member WHERE sign_up_day BETWEEN '2019-01-01' AND '2019-12-31';
+
+
+
+
+
