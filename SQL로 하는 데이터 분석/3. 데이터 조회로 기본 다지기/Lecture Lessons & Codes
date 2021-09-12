@@ -167,3 +167,21 @@ Unix timestamp를 다시 집어넣었더니 원래 날짜가 그대로 잘 나�
 날짜, 시간 관련 함수 : https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html
 
 그리고 MySQL이 아닌 다른 DBMS를 쓰는 분들은 이 페이지 내용을 보고 그대로 따라하시면 안 되고, 여러분이 쓰시는 DBMS의 매뉴얼 페이지를 참조해서 원하는 함수를 찾아야합니다. 이번 토픽에서 SQL의 기초 개념과 기본 함수들을 배우고, 여러분이 매 상황마다 필요한 함수들을 잘 검색하는 능력을 기른다면 여러분의 데이터 분석 능력은 급속도로 좋아질 겁니다. 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT * FROM main_copang.member WHERE age NOT BETWEEN 30 AND 39;
+SELECT * FROM main_copang.member WHERE YEAR(birthday) <= 1992;
+SELECT birthday FROM main_copang.member WHERE YEAR(birthday) <= 1992;
+SELECT birthday FROM main_copang.member WHERE MONTH(birthday) <= 3;
+SELECT birthday FROM main_copang.member WHERE MONTH(birthday) IN (1, 2, 5);
+SELECT birthday FROM main_copang.member WHERE DAYOFMONTH(birthday) BETWEEN 16 AND 31;
+SELECT email, sign_up_day, DATEDIFF('2019-01-01', sign_up_day) FROM main_copang.member;
+SELECT email, sign_up_day, CURDATE(), DATEDIFF(CURDATE(), sign_up_day) FROM main_copang.member;
+SELECT email, sign_up_day, birthday, DATEDIFF(sign_up_day, birthday) / 365 FROM main_copang.member;
+SELECT email, DATE_ADD(sign_up_day, INTERVAL 300 DAY) FROM main_copang.member;
+SELECT email, DATE_SUB(sign_up_day, INTERVAL 300 DAY) FROM main_copang.member;
+SELECT email, sign_up_day, UNIX_TIMESTAMP(sign_up_day) FROM main_copang.member;
+SELECT email, sign_up_day, FROM_UNIXTIME(UNIX_TIMESTAMP(sign_up_day)) FROM main_copang.member;
+
+
+
+
