@@ -421,3 +421,17 @@ signed는 처음 보는 데이터 타입인데요. signed는 양수와 음수를
 참고로 만약 문자열 타입으로 저장된 숫자값에 소수점이 포함되어 있다면 signed 대신 decimal(소수점이 있는 수를 나타내는 타입)을 적어주고 사용하면 됩니다. 이건 여러분이 직접 실험해보시기를 추천합니다.
 
 ex) SELECT id, age FROM main_copang.member ORDER BY CAST(age as signed) ASC;	
+
+
+*정렬 후 추리
+ex)
+SELECT * FROM main_copang.member
+ORDER BY sign_up_day DESC
+LIMIT 10;   -> 처음 10개만 추린다
+
+ex)
+SELECT * FROM main_copang.member
+ORDER BY sign_up_day DESC
+LIMIT 8, 2;   -> 9번째 로우부터 로우 두개만 추린다 (9번째 10번째)
+
+*로우는 0번 로우부터 시작한다
