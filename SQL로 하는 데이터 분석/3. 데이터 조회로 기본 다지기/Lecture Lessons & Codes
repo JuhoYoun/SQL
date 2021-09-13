@@ -338,3 +338,15 @@ LIKE BINARY '%g'
 
 이 대소문자 구분 문제는 문자열 패턴 조건을 사용하시는 많은 분들이 처음에 당황해하는 부분입니다. MySQL 설정에 상관없이 대소문자를 명확하게 구분하고 싶다면 BINARY를 잘 활용해보세요. 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+데이터 정렬
+
+ex)
+SELECT * FROM main_copang.member
+WHERE gender = 'm'
+    AND age >= 170
+ORDER BY height DESC;
+
+ex)
+SELECT * FROM main_copang.member
+ORDER BY MONTH(sign_up_day) DESC, email ASC;    -> 먼저 월별로 내림차순 정렬 후 정렬된 각각의 월 안에서 email별로 오름차순으로 정렬
