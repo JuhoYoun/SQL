@@ -349,4 +349,9 @@ ORDER BY height DESC;
 
 ex)
 SELECT * FROM main_copang.member
-ORDER BY MONTH(sign_up_day) DESC, email ASC;    -> 먼저 월별로 내림차순 정렬 후 정렬된 각각의 월 안에서 email별로 오름차순으로 정렬
+ORDER BY MONTH(sign_up_day) DESC, email ASC;    -> 먼저 월별로 내림차순 정렬 후 정렬된 각각의 월 안에서 email별로 오름차순으로 정렬 (월이 더 우선인 정렬 기준)
+
+*MySQL에서는 DESC나 ASC를 붙여주지 않았을 때 오름차순으로 정렬된다 (default)
+*Null은 보통 가장 작은 값으로 인식되어 정렬된다
+*Null 값을 제외하고 정렬하는 기능도 있다
+
