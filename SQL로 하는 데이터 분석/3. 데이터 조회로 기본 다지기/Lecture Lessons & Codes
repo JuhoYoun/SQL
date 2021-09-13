@@ -419,3 +419,5 @@ signed는 처음 보는 데이터 타입인데요. signed는 양수와 음수를
 만약 어떤 컬럼의 숫자값들이 TEXT 같은 문자열 타입으로 저장돼있지만, 정렬 기준으로 쓸 때는 숫자형으로 사용하고 싶다면 CAST 함수를 쓰면 되겠죠?
 
 참고로 만약 문자열 타입으로 저장된 숫자값에 소수점이 포함되어 있다면 signed 대신 decimal(소수점이 있는 수를 나타내는 타입)을 적어주고 사용하면 됩니다. 이건 여러분이 직접 실험해보시기를 추천합니다.
+
+ex) SELECT id, age FROM main_copang.member ORDER BY CAST(age as signed) ASC;	
