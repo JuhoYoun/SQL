@@ -9,7 +9,7 @@ Table
 *Table에서 개체 하나를 나타내는 단위를 Row (ex 학생)
 *각각의 개체가 갖는 속성을 Column 이라 한다 (ex 학번 이름 전공 성별)
 
-DMBS : Data Base Management System (ex MySQL, ORACLE, MS SQL Server, MariaDB, SQLite)
+DBMS : Data Base Management System (ex MySQL, ORACLE, MS SQL Server, MariaDB, SQLite)
 
 SQL : Structure Query Language 데이터베이스에 명령을 내리는 언어 
 *SQL은 국제 표준이 있어 배우면 어떤 DMBS도 사용 가능 하지만 모든 DMBS가 이 표준을 완벽하게 지키지는 않기 때문에 DMBS 별로 사용법이 조금씩 다를 수 있음
