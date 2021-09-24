@@ -246,6 +246,7 @@ END
 이전 영상 중에서 테이블에 존재하는 NULL을 다른 직군의 사람들도 잘 이해할 수 있도록 다른 표현으로 변환하는 방법을 배웠던 거, 기억나시죠? 그때는 COALESCE 함수를 사용했었는데요. MySQL에서 NULL을 다른 값으로 변환할 수 있는 방법에는 COALESCE 함수 말고 다른 것들도 있습니다.
 
 NULL을 다른 값으로 변환하는 방법들, 한번 정리해볼게요.
+
 1. COALESCE 함수 
 
 우리가 배웠던 COALESCE 함수입니다. 
@@ -261,3 +262,31 @@ COALESCE(height, weight * 2.3, 'N/A')
 이번엔 COALESCE 함수 안에 weight * 2.3이라는 식이 추가되었습니다. 지금 저는 사람의 키가 보통 몸무게에 2.3 을 곱한 값이라고 가정한 건데요. 만약 height 컬럼이 NULL이면, 해당 row의 weight 컬럼의 값을 갖고 키를 추론해본 겁니다. height 컬럼도 NULL이고, weight 컬럼도 NULL인 row라면 ‘N/A’가 출력됐을 겁니다. 결과를 보니까 다행히도 지금 height 컬럼과 weight 컬럼이 모두 NULL인 row는 없는 것 같네요. 
 
 만약 데이터 분석을 할 때 단 하나의 NULL도 허용할 수 없는 상황이라면, 이렇게 나름의 가정을 하고 NULL을 적절한 값으로 변환하는 것도 좋은 방법 중 하나입니다. 
+
+2. IFNULL 함수
+
+IFNULL 함수는 첫 번째 인자가 NULL인 경우에는, 두 번째 인자를 표시하고 NULL이 아니면 해당 값을 그대로 표현합니다. 아래 그림을 보시면 바로 이해되실 겁니다. 
+
+그러니까 height 컬럼이 NULL이면 'N/A'를 출력하고, NULL이 아니면 height 컬럼의 값을 그대로 출력하죠.
+
+ex) SELECT IFNULL(height, 'N/A') FROM copang_main.member;
+
+3. IF 함수
+
+IF 함수는 가장 첫 번째 인자로 어떤 조건식이 옵니다. 만약 그 조건식의 결과가 True라면 두 번째 인자를 리턴하고, False라면 세 번째 인자를 리턴합니다. 아래 그림을 보면 바로 이해되실 텐데요.
+
+지금 height IS NOT NULL이 True인 경우, 그러니까 height 컬럼에 값이 있는 경우에는 그 값이 그대로 출력되고, False인 경우 그러니까 height 컬럼이 NULL인 경우는 'N/A'이 출력되는 겁니다.
+
+ex) SELECT IF(height IS NOT NULL, height, 'N/A') FROM copang_main.member;
+
+4. CASE 함수 
+
+CASE 함수는 이전에 배웠는데요. 아래 SQL 문처럼 CASE 함수로도 NULL을 적절한 값으로 변환해서 나타낼 수 있습니다. 아래 그림은 따로 설명하지 않아도 되겠죠?
+
+ex) 
+
+SELECT 
+    CASE height IS NOT NULL THEN height
+    ELSE 'N/A'
+    END
+FROM copang_main.member;
