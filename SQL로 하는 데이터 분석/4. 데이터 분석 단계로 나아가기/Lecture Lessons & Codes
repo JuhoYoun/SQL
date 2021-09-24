@@ -4,3 +4,5 @@
 * SELECT MAX(height) FROM copang_main.member; -> MAX() function은 최대 height 값을 보여준다
 * SELECT MIN(height) FROM copang_main.member; -> MIN() function은 최소 height 값을 보여준다
 * SELECT AVG(height) FROM copang_main.member; -> AVG() function은 평균 height 값을 보여준다 단, Null 값들은 빼고 평균을 구한다
+* SELECT MAX(height), email FROM copang_main.member; -> error
+* SELECT MAX(height) email FROM copang_main.member; -> 최대 height 값의 칼럼 레이블명이 email로 바뀐다
