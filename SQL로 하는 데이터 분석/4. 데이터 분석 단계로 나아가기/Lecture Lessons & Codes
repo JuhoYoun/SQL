@@ -137,4 +137,8 @@ ALIAS
 
 CANCAT
 * Concatenate 연결하다
-* SELECT CONCAT(height, 'cm', ', ', weight, 'kg') AS Height and Weight; -> CONCAT function은 input 값들을 연결해 하나의 형태로 출력해준다
+* SELECT CONCAT(height, 'cm', ', ', weight, 'kg') AS 'Height and Weight'; -> CONCAT function은 input 값들을 연결해 하나의 형태로 출력해준다
+
+CASE / END
+ex)
+SELECT email, CONCAT(height, 'cm', ', ', weight, 'kg') AS 'Height and Weight', weight / ((height / 100) * (height / 100)) AS BMI 
