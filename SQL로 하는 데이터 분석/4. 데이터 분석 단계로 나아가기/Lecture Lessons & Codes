@@ -160,7 +160,7 @@ SELECT email, CONCAT(height, 'cm', ', ', weight, 'kg') AS 'Height and Weight', w
     WHEN weight / ((height / 100) * (height / 100)) >= 25 THEN '과체중 또는 비만'
     WHEN weight / ((height / 100) * (height / 100)) >= 18.5 AND weight / ((height / 100) * (height / 100)) < 25 THEN '정상'
     ELSE '저체중'
-END) AS 'Obesity Check'
+END) AS Obesity_Check
 
 FROM copang_main.member;
 
@@ -172,7 +172,7 @@ SELECT email, CONCAT(height, 'cm', ', ', weight, 'kg') AS 'Height and Weight', w
     WHEN weight / ((height / 100) * (height / 100)) >= 25 THEN '과체중 또는 비만'
     WHEN weight / ((height / 100) * (height / 100)) >= 18.5 AND weight / ((height / 100) * (height / 100)) < 25 THEN '정상'
     ELSE '저체중'
-END) AS 'Obesity Check'
+END) AS Obesity_Check
 
 FROM copang_main.member
-ORDERED BY 'Obesity Check' ASC;
+ORDER BY Obesity_Check ASC;
