@@ -61,4 +61,5 @@ NULL 다루기
 * SELECT * FROM copang_main.member WHERE height IS NULL; -> height 이 NULL인 로우만 출력
 * SELECT * FROM copang_main.member WHERE height IS NOT NULL; -> height이 NULL이 아닌 로우만 출력
 * SELECT * FROM copang_main.member WHERE height IS NULL OR age IS NULL OR weight IS NULL; -> OR문 같이 사용 예시
-* SELECT COALESCE(height, '----'), COALESCE(weight, '@@@@'), COALESCE(address, '????') FROM copang_main.member; -> COALESCE function은 로우들을 차례로 조회하면서 해당 칼럼값의 값이 있다면 그대로 리턴하고 값이 없다면(NULL) COALESCE function의 두번째 input값을 리턴한다 
+* SELECT COALESCE(height, '----'), COALESCE(weight, '@@@@'), COALESCE(address, '????') FROM copang_main.member; -> COALESCE function은 로우들을 차례로 조회하면서 해당 칼럼값의 값이 있다면 그대로 리턴하고 값이 없다면(NULL) COALESCE function의 두번째 input값을 리턴한다 -> 이 때 출력되는 테이블은  COALESCE(height, '----'), COALESCE(weight, '@@@@'), COALESCE(address, '????') 이렇게 세개의 칼럼값만 갖는다  
+
