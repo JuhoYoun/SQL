@@ -140,6 +140,7 @@ CANCAT
 * SELECT CONCAT(height, 'cm', ', ', weight, 'kg') AS 'Height and Weight'; -> CONCAT function은 input 값들을 연결해 하나의 형태로 출력해준다
 
 CASE / END
+*CASE문으로 조건에 따라 변하는 칼럼 값을 만들 수 있다
 ex)
 SELECT email, CONCAT(height, 'cm', ', ', weight, 'kg') AS 'Height and Weight', weight / ((height / 100) * (height / 100)) AS BMI,
 
