@@ -1,1 +1,6 @@
-
+데이터 특성 분석
+* SELECT COUNT(email) FROM copang_main.member; -> Count the number of rows that have email value (if a row has Null email vlaue, Count() function does not count the row) -> Count(email) 이라는 새로운 칼럼이 생기고 로우 개수를 보여준다
+* SELECT COUNT(*) FROM copang_main.member; -> 이 SELECT 문에 의해 리턴되는 전체 로우값을 보여준다 -> 어떤 칼럼 값들의 Null 여부와 상관 없이 테이블의 전체 로우 개수를 보고 싶을 때 사용한다
+* SELECT MAX(height) FROM copang_main.member; -> MAX() function은 최대 height 값을 보여준다
+* SELECT MIN(height) FROM copang_main.member; -> MIN() function은 최소 height 값을 보여준다
+* SELECT AVG(height) FROM copang_main.member; -> AVG() function은 평균 height 값을 보여준다 단, Null 값들은 빼고 평균을 구한다
