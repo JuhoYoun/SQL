@@ -452,3 +452,14 @@ GROUP BY SUBSTRING(address, 1, 2);
 -> address는 거의 모든 로우가 고유값을 가지고 있어 address로 그룹핑 하는것은 적절하지 않다, SUBSTRING()을 활용해서 지역별로 그룹핑할 수 있다
 
 *그룹핑 기준에는 여러개의 컬럼을 써도 된다
+ex)
+SELECT
+    SUBSTRING(address, 1, 2) as region,
+    COUNT(*),
+    gender
+FROM copang_main.member
+GROUP BY 
+    SUBSTRING(address, 1, 2),
+    gender;
+    
+-> 지역과 성별로 동시에 적용해서 그룹핑할 수 있다 -> 그룹핑 기준에 gender를 추가하면 서울 지역 그룹이 서울에 사는 여성과 서울에 사는 남성 그룹으로 나뉘어진다
