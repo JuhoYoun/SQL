@@ -463,3 +463,15 @@ GROUP BY
     gender;
     
 -> 지역과 성별로 동시에 적용해서 그룹핑할 수 있다 -> 그룹핑 기준에 gender를 추가하면 서울 지역 그룹이 서울에 사는 여성과 서울에 사는 남성 그룹으로 나뉘어진다
+
+그루핑 3
+
+* 그루핑한 그룹들 중 특정 그룹만 보고 싶다면?
+* HAVING을 통해 필터링
+ex)
+SELECT SUBSTRING(address, 1, 2) AS region, gender, COUNT(*)
+FROM main_copang.member 
+GROUP BY gender, SUBSTRING(address, 1, 2)
+HAVING region IS NOT NULL
+ORDER BY region ASC;
+->
