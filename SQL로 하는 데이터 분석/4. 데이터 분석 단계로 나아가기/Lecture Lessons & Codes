@@ -410,3 +410,34 @@ SELECT RPAD(name, 8, '!') FROM copang_main.member;
 
 LTRIM 함수는 왼쪽의 공백만, RTIM 함수는 오른쪽의 공백만, TRIM 함수는 왼쪽, 오른쪽 양쪽 모두의 공백을 제거해서 보여줍니다. 이때 이런 함수들이 문자열 내부에 존재하는 공백을 없애는 건 아니라는 사실에 주의하세요. 숫자값 뿐만 아니라 문자열 값도 테이블에서 자주 다루게 될테니 이런 함수들을 잘 숙지하고 있으면 좋겠죠? 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+그루핑
+* SELECT * FROM copang_main.member GROUP BY gender; -> Error Code: 1055. Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'main_copang.member.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+* SELECT gender FROM copang_main.member GROUP BY gender; -> 모든 로우가 gender값을 기준으로 같은 gender 값을 가진 로우는 같은 그룹에 속하게된다 -> 실행 후 보이는 결과는 Distinct() function을 했을 때와 비슷하나 내부적으로는 전혀 다르다 -> gender 값이 m인 로우에는 gender 값이 m인 모든 로우가 들어가 있고 f인 로우에는 gender 값이 f인 모든 로우가 들어있다 -> 각각의 로우는 하나의 그룹을 나타낸다
+* SELECT gender, COUNT(*) FROM copang_main.member GROUP BY gender; -> 남성 회원 그룹과 여성 회원 그룹에 대해 각각 COUNT()가 실행된다 (마치 두개의 테이블로 나뉜거 같다?)
+* SELECT gender, COUNT(*), AVG(height) FROM copang_main.member GROUP BY gender; -> AVG() 도 여성 회원과 남성 회원 그룹에 각각 실행된다
+* SELECT gender, COUNT(*), AVG(height), MIN(weight) FROM copang_main.member GROUP BY gender; -> MIN()도 각각의 그룹에 따로 적용된다
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+이전 영상에서 배운 그루핑(Grouping)의 개념, 잘 이해하셨나요? 그루핑은 SQL에서 데이터를 분석할 때 아주 중요한 개념이기 때문에 확실하게 이해하고 넘어가셔야 합니다. 특히 GROUP BY를 써서 그루핑을 하고 난 후에, 생성된 각 그룹(하나의 row로 표현되었던)에 대해서 AVG, MIN 등의 집계 함수(Aggregate Function)가 각각 동작했던 아래와 같은 화면 속 이미지를 잘 기억하셔야 합니다.
+
+예를 들어, 그루핑을 하고 나서 집계 함수 중 하나인 COUNT 함수를 사용하면
+
+아래와 같이 각 그룹의 row 수가 잘 출력됩니다.
+
+이 원리를 잘 이해하시는 게 중요합니다.
+
+그루핑을 더 잘 이해하기 위해서는, GROUP BY를 안 썼을 때는 전체 테이블이 그냥 하나의 그룹이라고 생각하시면 좋습니다. 이전에 맨 처음 집계 함수들을 배웠을 때는 아래 이미지들과 같이 GROUP BY를 쓰지 않았는데요.
+1. MAX 함수
+
+2. COUNT 함수
+
+3. AVG 함수
+
+위 그림들처럼 GROUP BY를 쓰지 않을 때는 테이블의 전체 row가 하나의 그룹이었고, 그 하나의 그룹에 이 집계 함수가 작동했던 겁니다. 하지만 GROUP BY를 써서 그루핑이 되고 나면 각 그룹에 대해서 집계 함수가 작동하게 되는 거구요.
+
+이런 관점에서 GROUP BY의 개념을 생각하면, 더 쉽게 이해할 수 있습니다. 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
