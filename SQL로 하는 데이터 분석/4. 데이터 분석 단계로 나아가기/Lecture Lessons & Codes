@@ -474,4 +474,12 @@ FROM main_copang.member
 GROUP BY gender, SUBSTRING(address, 1, 2)
 HAVING region IS NOT NULL
 ORDER BY region ASC;
-->
+-> GROUP BY 뒤에 HAVING을 써서 그루핑 된 로우들을 다시 필터링할 수 있다 이 경우 GROUP BY 뒤에 WHERE을 쓰면 안된다 WHERE은 내부적으로 로우들을 하나하나 살펴 볼 때 WHERE 조건을 적용시키는 것이고 HAVING 은 로우들을 하나하나 살펴본 후 그루핑한것을 다시 필터링 하는것이다 
+
+ex)
+SELECT SUBSTRING(address, 1, 2) AS region, gender, AVG(age), COUNT(*)
+FROM main_copang.member 
+WHERE age >= 0 AND age <= 150
+GROUP BY gender, SUBSTRING(address, 1, 2)
+HAVING region IS NOT NULL
+ORDER BY region ASC;
