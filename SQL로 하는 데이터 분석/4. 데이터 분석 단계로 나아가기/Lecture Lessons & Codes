@@ -483,3 +483,20 @@ WHERE age >= 0 AND age <= 150
 GROUP BY gender, SUBSTRING(address, 1, 2)
 HAVING region IS NOT NULL
 ORDER BY region ASC;
+-> 일단 로우들을 하나씩 조회할 때 WHERE 조건으로 필터링을 해서 그루핑을 한다 그루핑 후엔 HAVING 조건을 통해 그룹들을 다시 필터링한다
+
+ex)
+SELECT SUBSTRING(address, 1, 2) AS region, gender, AVG(age), COUNT(*)
+FROM main_copang.member 
+WHERE age >= 0 AND age <= 150
+GROUP BY gender, SUBSTRING(address, 1, 2)
+HAVING region = '서울' AND gender = 'm'
+ORDER BY region ASC;
+
+ex)
+SELECT SUBSTRING(address, 1, 2) AS region, gender, AVG(age), COUNT(*)
+FROM main_copang.member 
+GROUP BY gender, SUBSTRING(address, 1, 2)
+WHERE region IS NOT NULL
+ORDER BY region ASC;
+-> SYNTAX ERROR
