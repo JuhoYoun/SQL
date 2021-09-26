@@ -619,3 +619,18 @@ GROUP BY에 관한 이 규칙을 확실하게 이해하고 넘어가세요.
 
 SQL 문의 실행 순서, 확실하게 암기하세요!
 -------------------------------------------------------------------------------------------------------------------------------------------
+
+ROLLUP
+ex)
+SELECT SUBSTRING(address, 1, 2) AS region, gender, COUNT(*)
+FROM main_copang.member 
+GROUP BY SUBSTRING(address, 1, 2), gender
+WITH ROLLUP
+HAVING region IS NOT NULL
+ORDER BY 
+    region ASC
+    gender DESC;
+-> WITH ROLLUO 사용 전과 달리 region 값에는 NULL이 없는데 gender 값에 NULL이 있는 로우들이 추가되었다 -> 추가된 로우들은 region값만 고려하고 gender 값은 고려하지 않은 카운트값을 보여주고 있다 -> 예시로 서울 남자 회원 서울 여자 회원 로우에 서울 그리고 gender가 NULL인 로우가 추가되었는데 이 로우는 남자 여자 회원을 총합한 카운트 값을 보여준다 
+* WITH ROLLUP을 쓰면 부분 총계를 보여준다 -> 말다, 소매를 걷어 올리다 -> 세부 그룹들을 좀더 큰 단위의 그룹을 중간중간에 합쳐준다
+* 위의 SELECT 문에서 그루핑 시 region이 gender 보다 앞서며 상위 기준이 된다 -> 더 상위 기준인 region 안에서 각 그룹들을 합친 결과를 출력한다
+------------------------------------------------------------------------------------------------------------------------------
