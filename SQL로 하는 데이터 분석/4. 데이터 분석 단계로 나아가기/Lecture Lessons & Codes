@@ -193,6 +193,14 @@ FROM copang_main.member
 ORDER BY 'Obesity Check' ASC;
 -> 이 경우 정렬이 되지않음 왜?
 
+식별자에 공백이 있으므로
+
+이런 경우엔 `(backtick)으로 감싸주셔야 올바른 결과가 나오게 될거에용
+
+https://stackoverflow.com/questions/11321491/when-to-use-single-quotes-double-quotes-and-backticks-in-mysql
+
+요 링크도 함께 참고해보시면 도움이 되실겁니당!
+
 ------------------------------------------------------------------------------------------------------------------------------------
 1. 단순 CASE 함수
 
