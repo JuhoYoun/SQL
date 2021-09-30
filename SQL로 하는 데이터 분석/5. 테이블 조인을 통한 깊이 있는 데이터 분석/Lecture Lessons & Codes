@@ -149,3 +149,5 @@ SELECT
     s.inventory_count
 FROM item AS i LEFT OUTER JOIN stock AS s
 ON i.id = s.item_id;
+
+* AS 를 스킵해도 된다
