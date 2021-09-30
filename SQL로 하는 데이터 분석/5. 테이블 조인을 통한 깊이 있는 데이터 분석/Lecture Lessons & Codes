@@ -127,3 +127,14 @@ ON item.id = stock.item_id
 * SELECT 문 : item 테이블의 id와 name 칼럼과 stock 테이블의 item_id와 inventory_count 칼럼을 보여달라는 뜻
 * 위의 sql문을 실행 시 item_id와 inventory_count에 Null이 있는 로우들도 포함된다 -> item 테이블의 id 칼럼값이 stock 테이블의 item_id 칼럼에 존재하지 않는 경우들 -> LEFT OUTER JOIN을 했기 때문에 왼쪽에 있는 item 테이블 기줕으로 테이블이 조인되었기 때문
 
+ex)
+SELECT
+    item.id
+    item.name
+    stock.item_id
+    stock.inventory_count
+FROM item RIGHT OUTER JOIN stock
+ON item.id = stock.item_id
+
+* RIGHT OUTER JOIN -> 오른쪽의 stock 테이블 기준으로 테이블이 합쳐진다
+* 이 경우 NULL 값이 있는 로우가 없어졌다 -> stock 테이블을 기준으로 하기 때문이다 -> stock 테이블의 모든 item_id 칼럼 값은 item 테이블의 id 칼럼에 존재하기 때문
