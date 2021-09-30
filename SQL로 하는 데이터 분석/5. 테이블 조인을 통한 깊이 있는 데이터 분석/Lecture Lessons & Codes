@@ -209,8 +209,57 @@ SELECT
 FROM item AS i INNER JOIN stock AS s
 ON i.id = s.item_id;
 
-
 --------------------------------------------------------------------------------------------------------------------
 
+이전 영상에서 item 테이블과 stock 테이블을
 
+RIGHT OUTER JOIN한 결과와 INNER JOIN한 결과가 같았습니다. 그 이유는 stock 테이블은 당연히 item 테이블에 존재하는 상품의 재고 수를 담고 있고, item 테이블에 있지 않은 엉뚱한 상품의 재고 수를 담고 있지는 않기 때문에 그랬는데요. 즉, stock 테이블의 item_id 컬럼이 item 테이블의 id 컬럼을 참조하는 Foreign Key였기 때문입니다. 이렇게 Foreign Key를 기준으로 조인하면 하나의 OUTER JOIN(LEFT 또는 RIGHT)의 결과와 INNER JOIN의 결과가 같을 수밖에 없습니다.
+
+하지만 꼭 Foreign Key를 기준으로 조인을 해야만 하는 건 아닙니다. Foreign Key가 아닌 컬럼을 기준으로 해서 조인할 수도 있는데요. 그리고 이렇게 하면 보통
+
+(1) LEFT OUTER JOIN 
+
+(2) RIGHT OUTER JOIN
+
+(3) INNER JOIN 
+
+세 가지 조인의 결과가 모두 달라집니다.
+
+잠깐 다음 두 테이블을 볼까요?
+
+지금 왼쪽의 player 테이블은 축구 선수의 이름과 그 소속팀을 나타내는 테이블이고, 오른쪽의 team 테이블은 각 축구팀이 어느 지역에 속하는지를 나타내는 테이블입니다. 지금 player 테이블의 team 컬럼과 team 테이블의 team_name 컬럼이 서로 연관된 컬럼이라는 게 한 눈에 보이네요.
+
+하지만 player 테이블의 team 컬럼의 값이 반드시 team 테이블의 team_name 컬럼에 존재하는 것은 아닙니다. 지금 보면 dragons, tigers, runaway_team, freestyle이라는 팀은 team 테이블에 없습니다. 그러니까 두 테이블 사이에는 Foreign Key 관계가 없는 겁니다. 그래도 조인은 할 수 있는데요. 
+
+Workbench에서 각 테이블의 모습은 다음과 같습니다.
+
+player 테이블
+
+team 테이블
+
+player 테이블의 team 컬럼과, team 테이블의 team_name 컬럼을 기준으로 해서 두 테이블로 이때까지 배운 3가지 조인을 해보겠습니다.
+1. LEFT OUTER JOIN
+
+결과를 보니 지금 선수들의 소속팀 중에 아직 지역 정보가 없는 팀들도 있네요. 지금 SELECT 절 뒤의 컬럼 순서는 여러분의 이해를 돕기 위해 제가 적절하게 조정했습니다.
+2. RIGHT OUTER JOIN
+
+지금 superkick이라는 팀에 속한 선수가 2명 있습니다. 그리고 아직 그 소속 선수들의 정보가 player 테이블에 없는 팀도 있네요.
+3. INNER JOIN
+
+선수 정보와 팀 정보가 둘다 존재하는 것들이 잘 조회됩니다. 위의 두 OUTER JOIN과는 전혀 다른 결과죠?
+
+자, 정리해볼게요.
+
+이전 영상에서 item 테이블과 stock 테이블을 조인할 때는 RIGHT OUTER JOIN과 INNER JOIN의 결과가 같았지만, 지금 player 테이블과 team 테이블을 조인할 때는 결과가 다르죠?
+
+다시 한번 말하자면, 이전 영상의
+
+stock 테이블의 경우 그 item_id 컬럼이 item 테이블의 id 컬럼을 참조하는 Foreign Key(외래키)였습니다. 즉, item_id 컬럼의 값이 id 컬럼에 반드시 존재할 수밖에 없는 관계였죠.
+
+하지만 player 테이블의 team 컬럼과 team 테이블의 team_name 컬럼은 그런 관계는 아니었구요.
+
+조인을 할 때 보통 Foreign Key를 기준으로 하는 것은 맞지만, 그렇다고 꼭 Foreign Key만을 기준으로 해야하는 것은 아닙니다. 방금처럼 꼭 Foreign Key가 존재하지 않더라도 서로 같은 의미를 나타내는 컬럼들(team 컬럼, team_name 컬럼)을 기준으로 조인하기도 하죠.
+
+꼭 Foreign Key가 아니더라도 서로 연관있는 컬럼을 기준으로 조인을 하는 경우도 많습니다. 이 사실을 꼭 기억하세요.
+---------------------------------------------------------------------------------------------------------------------------------
 
