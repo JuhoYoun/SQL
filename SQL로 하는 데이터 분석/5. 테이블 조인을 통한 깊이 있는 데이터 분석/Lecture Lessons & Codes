@@ -119,9 +119,11 @@ SELECT
     item.id
     item.name
     stock.item_id
-    stock.count
+    stock.inventory_count
 FROM item LEFT OUTER JOIN stock
 ON item.id = stock.item_id
 
-
+* LEFT OUTER JOIN : 왼쪽에 있는 item 테이블 기준으로 해서 거기에 stock 테이블을 합치라는 뜻 -> 기준은 아래줄의 ON 에 지시되어 있다 -> item 테이블의 id 값과 stock 테이블의 item.id 값을 비교해서 서로 값이 같은 로우끼리 가로 방향으로 연결하라는 뜻
+* SELECT 문 : item 테이블의 id와 name 칼럼과 stock 테이블의 item_id와 inventory_count 칼럼을 보여달라는 뜻
+* 위의 sql문을 실행 시 item_id와 inventory_count에 Null이 있는 로우들도 포함된다 -> item 테이블의 id 칼럼값이 stock 테이블의 item_id 칼럼에 존재하지 않는 경우들 -> LEFT OUTER JOIN을 했기 때문에 왼쪽에 있는 item 테이블 기줕으로 테이블이 조인되었기 때문
 
