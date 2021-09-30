@@ -111,3 +111,17 @@ Foreign Key 설정 방법
 * Column에 item_id, Referenced Colunm에 id 를 설정해준다
 * Apply를 클릭해 설정을 마무리한다
 
+Join
+* 여러 테이블을 합쳐서 하나로 보이게 만든다
+
+ex)
+SELECT
+    item.id
+    item.name
+    stock.item_id
+    stock.count
+FROM item LEFT OUTER JOIN stock
+ON item.id = stock.item_id
+
+
+
