@@ -521,3 +521,5 @@ FROM
         ON r.mem_id = m.id;
 
 * item 테이블과 review 테이블을 조인한 결과로 나온 테이블을 다시 member 테이블과 조인한다
+* 테이블 구성상 review 테이블은 item_id, mem_id 두개의 foreign key를 가질 수 있다. 단 foreign key 설정을 안해도 조인은 가능하다
+
