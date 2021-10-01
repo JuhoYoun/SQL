@@ -382,3 +382,44 @@ ON old.id = new.id;
 
 -> item 테이블에는 있지만 item_new 테이블에 없는 로우들을 식별 가능하다 -> new_id와 new_name이 NULL이다
 
+
+ex)
+SELECT
+    old.id AS old_id,
+    old.name AS old_name,
+    new.id AS new_id,
+    new.name AS new_name
+FROM item AS old RIGHT OUTER JOIN item_new AS new
+ON old.id = new.id;
+
+-> item_new 테이블에만 있고 item 테이블에는 없는 로우들을 식별 가능
+
+ex)
+SELECT
+    old.id AS old_id,
+    old.name AS old_name,
+    new.id AS new_id,
+    new.name AS new_name
+FROM item AS old RIGHT OUTER JOIN item_new AS new
+ON old.id = new.id
+WHERE old.id IS NULL;
+
+-> item_new 에만 있는 로우들만 출력
+
+ex)
+SELECT
+    old.id AS old_id,
+    old.name AS old_name,
+    new.id AS new_id,
+    new.name AS new_name
+FROM item AS old INNER JOIN item_new AS new
+ON old.id = new.id;
+
+-> 두 테이블 모두 공통으로 가지고 있는 로우들만 출력
+
+ex)
+SELECT * FROM item
+UNION
+SELECT * FROM item_new;
+
+-> 집합 연산 -> 두 테이블에 있는 모든 로우들을 세로로 출력 -> 공통의 로우들은 한번만 출력된다
