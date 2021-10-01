@@ -586,4 +586,4 @@ FROM
         ON r.mem_id = m.id
 WHERE m.gender = 'f'
 GROUP BY i.id, i.name
-ORDER BY AVE(star) DESC;
+ORDER BY AVG(star) DESC;
