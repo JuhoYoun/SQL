@@ -116,9 +116,9 @@ Join
 
 ex)
 SELECT
-    item.id
-    item.name
-    stock.item_id
+    item.id,
+    item.name,
+    stock.item_id,
     stock.inventory_count
 FROM item LEFT OUTER JOIN stock
 ON item.id = stock.item_id
@@ -129,9 +129,9 @@ ON item.id = stock.item_id
 
 ex)
 SELECT
-    item.id
-    item.name
-    stock.item_id
+    item.id,
+    item.name,
+    stock.item_id,
     stock.inventory_count
 FROM item RIGHT OUTER JOIN stock
 ON item.id = stock.item_id
@@ -143,9 +143,9 @@ ON item.id = stock.item_id
 
 ex)
 SELECT
-    i.id
-    i.name
-    s.item_id
+    i.id,
+    i.name,
+    s.item_id,
     s.inventory_count
 FROM item AS i LEFT OUTER JOIN stock AS s
 ON i.id = s.item_id;
@@ -202,9 +202,9 @@ INNER JOIN
 
 ex)
 SELECT
-    i.id
-    i.name
-    s.item_id
+    i.id,
+    i.name,
+    s.item_id,
     s.inventory_count
 FROM item AS i INNER JOIN stock AS s
 ON i.id = s.item_id;
@@ -368,3 +368,14 @@ SELECT * FROM member_B
 
 그 전에 일단 여러분께서는 이 노트의 내용을 완벽하게 이해해주세요!
 ----------------------------------------------------------------------------------------------------------------------
+
+같은 종류의 테이블 조인하기
+
+ex)
+SELECT
+    old.id,
+    old.name,
+    new.id,
+    new.name
+FROM item AS old LEFT OUTER JOIN item_new AS new
+ON old.id = new.id;
