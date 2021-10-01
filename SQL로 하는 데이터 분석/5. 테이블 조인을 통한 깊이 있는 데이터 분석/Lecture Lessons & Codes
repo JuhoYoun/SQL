@@ -578,10 +578,12 @@ item - 상품 / review - 리뷰 / member - 회원
 
 의미 있는 데이터 추출하기
 
-SELECT *
+SELECT i.id, i.name, AVG(star)
 FROM
     item AS i LEFT OUTER JOIN review AS r
         ON r.item_id = i.id
     LEFT OUTER JOIN member AS m
         ON r.mem_id = m.id
-WHERE m.gender = 'f';
+WHERE m.gender = 'f'
+GROUP BY i.id, i.name
+ORDER BY AVE(star);
