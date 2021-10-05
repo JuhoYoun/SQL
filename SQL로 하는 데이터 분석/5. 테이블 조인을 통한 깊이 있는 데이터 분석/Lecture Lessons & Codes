@@ -731,6 +731,11 @@ ON p.team_name = t.team_name;
 
 하지만 동등 조건이 아닌 다른 종류의 조건을 사용해서 조인을 할 수도 있는데요. 이런 조인을 Non-Equi 조인이라고 합니다. 바로 그 예를 보여드릴게요. 
 
+SELECT m.email, m.sign_up_day, i.name, i.registration_date
+FROM copang_main.member AS m LEFT OUTER JOIN copang_main.item AS i
+ON m.sign_up_day < i.registration_date
+ORDER BY m.sign_up_day ASC;
+
 지금 저는 member 테이블과 item 테이블을 LEFT OUTER JOIN 했습니다. 그런데 ON 뒤의 조인 조건을 보니 뭔가 좀 이상하죠? 등호가 아니라 부등호(<)가 들어있는데요. 
 
 실행결과를 보면 member 테이블의 sign_up_day(회원의 사이트 가입일)보다 더 이후인 registration_date(상품이 사이트에 등록된 날)을 가진 item들이 연결되었습니다. 이 결과를 보면, 특정 회원이 가입한 이후에 사이트에 올라온 상품들이 무엇인지 확인할 수 있는데요. 좀더 스크롤을 내려볼게요.
