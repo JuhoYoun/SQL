@@ -699,6 +699,16 @@ FULL OUTER JOIN은 두 테이블의 LEFT OUTER JOIN 결과와 RIGHT OUTER JOIN �
 
 위에서 Natural Join을 배울 때 봤던 이 두 테이블을 FULL OUTER JOIN 해보겠습니다. 
 
+SELECT *
+FROM player AS p LEFT OUTER JOIN team AS t
+ON p.team_name = t.team_name
+
+UNION ALL
+
+SELECT *
+FROM player AS p RIGHT OUTER JOIN team AS t
+ON p.team_name = t.team_name
+
 위 SQL 문, 이해되시나요? 지금 하늘색 영역이 LEFT OUTER JOIN 부분이고, 그 결과입니다. 그리고 빨간색 영역이 RIGHT OUTER JOIN 부분이고, 그 결과이구요. 이 둘을 UNION ALL한 결과인데요. 두 결과가 그대로 잘 합쳐졌습니다. 그런데 지금 이 결과를 보면 
 
 서로 겹치는 row들이 보입니다. id 컬럼을 보면 개수가 2개인 row들이 보이는데요. 이런 중복 row들은 제거하고 하나만 보이도록 해볼게요. 어떻게 하면 될까요? 이전 노트에서 배운대로 UNION ALL 대신 UNION을 사용하시면 됩니다. 
