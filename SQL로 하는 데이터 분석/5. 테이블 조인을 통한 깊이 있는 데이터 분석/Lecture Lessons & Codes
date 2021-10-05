@@ -598,4 +598,9 @@ FROM
         ON r.mem_id = m.id
 WHERE m.gender = 'f'
 GROUP BY i.id, i.name
-ORDER BY AVG(star) DESC;
+HAVING COUNT(*) > 1
+ORDER BY 
+    AVG(star) DESC
+    COUNT(*) DESC;
+
+-> 각 상품에 달린 리뷰 개수 볼수 있게 수정 -> 평점이 얼마나 신뢰도 있는가 볼 수 있다 -> 리뷰 두개 이상인 그룹들만 필터링 -> 신뢰도 있는 평점만 걸러낸다 -> 정렬 시 같은 평점이면 리뷰수가 많은게 먼저 오도록 설정
