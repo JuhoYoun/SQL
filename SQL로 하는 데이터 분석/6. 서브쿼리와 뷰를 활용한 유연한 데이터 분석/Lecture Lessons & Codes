@@ -26,3 +26,10 @@ ORDER BY avg_star DESC;
 
 서브쿼리의 다양한 사용법을 이번 챕터에서 하나씩 배워봅시다
 --------------------------------------------------------------------------------------------------------------------------------
+
+SELECT 절에 있는 서브쿼리
+
+ex)
+SELECT 
+id, name, price, (SELECT MAX(price) FROM item) AS max_price   -> 나중에 copang_main.item 으로 한번 해보자
+FROM copang_main.item;
