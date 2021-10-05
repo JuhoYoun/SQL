@@ -1,1 +1,10 @@
-https://github.com/JuhoYoun/SQL
+서브 쿼리
+* SQL 문에 부품처럼 들어가는 SELECT 문
+
+ex)
+SELECT i.id, i.name, AVG(star) AS avg_star
+FROM item AS i LEFT OUTER JOIN review AS r
+ON r.item_id = i.id
+GROUP BY i.id, i.name
+HAVING avg_star < (SELECT AVG(star) FROM review)       -> 괄호 안의 부분이 서브쿼리
+ORDER BY avg_star DESC;
