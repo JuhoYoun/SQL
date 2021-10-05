@@ -684,6 +684,13 @@ LEFT OUTER JOIN인 SELF JOIN을 한번 더 하니까, 한 직원의, 직속 상�
 방금 본 것처럼 SELF JOIN은 조인 방식에 있어서 뭔가 새로운 조인은 아닙니다. 다만, 조인 대상이 같은 테이블을 마치 별도의 테이블인 것처럼 간주하고 진행된다는 점에서 특색이 있는 조인인데요. 
 
 방금 보신 것처럼 SELF JOIN을 하면 하나의 테이블에 담긴 데이터를 다양한 관점에서 바라볼 수 있게 됩니다. 
+
+SELECT *
+FROM employee AS e1 LEFT OUTER JOIN employee AS e2
+ON e1.boss = e2.id
+LEFT OUTER JOIN employee AS e3
+ON e2.boss = e3.id;
+
 4. FULL OUTER JOIN 
 
 FULL OUTER JOIN은 뭘까요? 우리는 LEFT OUTER JOIN과, RIGHT OUTER JOIN을 배웠습니다. 둘다 왼쪽이나 오른쪽에 있는 테이블 하나를 기준으로 두고 상대 테이블을 조인하는 거였죠? 
@@ -705,6 +712,7 @@ FROM player AS p FULL OUTER JOIN team AS t
 ON p.team_name = t.team_name;
 
 이라고만 써도, 위와 같은 결과를 볼 수 있습니다. 
+
 5. Non-Equi 조인 
 
 자, 마지막으로 이때까지 우리가 살펴봤던 조인과는 전혀 다른 성격의 조인을 살펴보겠습니다. 이때까지 우리는 조인 조건을 설정할 때 두 컬럼의 값이 같은지를 기준으로 했습니다. 즉, 조인 조건에 항상 등호(=)를 사용해왔죠. 
