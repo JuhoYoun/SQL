@@ -1,5 +1,8 @@
 서브 쿼리
 * SQL 문에 부품처럼 들어가는 SELECT 문
+* Sub (하위의) Query (데이터베이스에 보내는 요청)
+* 서브쿼리를 쓸 때는 괄호로 서브쿼리를 꼭 감싸줘야한다
+
 
 ex)
 SELECT i.id, i.name, AVG(star) AS avg_star
