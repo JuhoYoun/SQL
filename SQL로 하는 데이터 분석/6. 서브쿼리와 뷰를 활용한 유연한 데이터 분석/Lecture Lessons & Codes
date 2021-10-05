@@ -57,8 +57,20 @@ WHERE price = (SELECT MAX(price) FROM item);
 1. 조인을 이용해서
 2. 서브쿼리를 이용해서
 
+ex1)
+
 SELECT *
 FROM item AS i LEFT OUTER JOIN review AS r
 ON i.id = review.item_id
 GROUP BY i.id, i.name
 HAVING COUNT(*) > 2;
+
+ex2)
+
+SELECT * FROM item
+WHERE id IN
+( 
+SELECT item_id
+FROM review
+GROUP BY item_id HAVING COUNT(*) >= 3
+);
