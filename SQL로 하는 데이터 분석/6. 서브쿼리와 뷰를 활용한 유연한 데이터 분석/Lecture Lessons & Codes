@@ -33,3 +33,12 @@ ex)
 SELECT 
 id, name, price, (SELECT MAX(price) FROM item) AS max_price   -> 나중에 copang_main.item 으로 한번 해보자
 FROM copang_main.item;
+
+
+WHERE 절에 있는 서브쿼리
+
+ex)
+SELECT 
+id, name, price, (SELECT AVG(price) FROM item) AS avg_price
+FROM copang_main.item
+WHERE price >= (SELECT AVG(price) FROM item);
