@@ -74,3 +74,4 @@ SELECT item_id
 FROM review
 GROUP BY item_id HAVING COUNT(*) >= 3
 );
+-> 이 경우 서브 쿼리가 하나의 값만을 리턴하지 않는다
