@@ -48,3 +48,17 @@ SELECT
 id, name, price, (SELECT AVG(price) FROM item) AS avg_price
 FROM copang_main.item
 WHERE price = (SELECT MAX(price) FROM item);
+
+
+* 위의 서브쿼리들은 모두 값 하나만을 리턴하는 서브쿼리들이다
+* 서브쿼리가 모두 값 하나만을 리턴하지는 않는다
+
+코팡의 상품들 중에서 리뷰가 최소 3개 이상 달린 상품의 정보만 보려면 어떻게 해야할까?
+1. 조인을 이용해서
+2. 서브쿼리를 이용해서
+
+SELECT *
+FROM item AS i LEFT OUTER JOIN review AS r
+ON i.id = review.item_id
+GROUP BY i.id, i.name
+HAVING COUNT(*) > 2;
