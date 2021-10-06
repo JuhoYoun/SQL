@@ -335,4 +335,45 @@ FROM item AS i INNER JOIN review AS r
 ON i.id = r.item_id INNER JOIN member AS m
 ON m.id = r.mem_id) AS copang_report;
 ------------------------------------------------------------------------------------------------------------------------------
+자, 이제 우리는 서브쿼리(Subquery)에 대해서 어느 정도 배웠습니다. 그런데 여기서 잠시 고민해볼 문제가 하나 있는데요. 예시를 들어서 설명할게요.
 
+잠깐 아래 SQL 문을 보세요.
+
+SELECT id, name, (SELECT inventory_count FROM stock WHERE item.id = stock.item_id)
+FROM item;
+
+이 SQL 문은 지금 3개의 컬럼을 조회하고 있습니다.
+
+(1) item 테이블의 id 컬럼,
+
+(2) item 테이블의 name 컬럼,
+
+(3) stock 테이블의 inventory_count 컬럼
+
+이렇게 3개입니다.
+
+item 테이블은 코팡의 상품 정보 테이블, stock 테이블은 각 상품의 재고 정보 테이블이었던 거, 기억나시죠?
+
+지금 보면 마지막 3번째 컬럼은 서브쿼리로 표현되었다는 걸 알 수 있습니다. 그리고 좀더 생각해보면 이건 이전 노트에서 배운 상관 서브쿼리(Correlated Subquery)입니다. 상관 서브쿼리를 해석하는 방법, 기억나시나요? 지금 3번째 컬럼을 나타내는 서브쿼리를 해석해볼게요.
+
+(a) 일단 item 테이블의 첫 번째 row를 생각합니다.
+
+(b) 그 row의 id 컬럼의 값과 같은 값을 item_id 컬럼에 가진 stock 테이블의 row를 찾습니다.
+
+(c) 찾은 stock 테이블의 row의 inventory_count 컬럼의 값을 리턴합니다.
+
+그리고 item 테이블의 두 번째 row, 세 번째 row.. 순으로 (b), (c)의 단계를 반복하면 되는데요. 이렇게 하면 item 테이블의 각 상품에 알맞은 재고 수(inventory_count) 값을 매칭시킬 수 있습니다.
+
+그런데 사실 위 결과는 우리가 챕터 5에서 배웠던 조인(join)만으로도 충분히 해결할 수 있습니다. 아래 SQL 문을 보면,
+
+SELECT i.id, i.name, s.inventory_count
+FROM item AS i LEFT OUTER JOIN stock AS s
+ON item.id = stock.item_id;
+
+조인을 통해서도 똑같은 결과를 조회할 수 있습니다.
+
+그럼 과연 상관 서브쿼리와 조인, 이 둘 중에서 무엇을 써야할까요? 정답은 없습니다. 데이터를 분석할 때는 여러분이 더 익숙하고 직관적으로 이해할 수 있는 것을 선택하면 되는데요.
+
+하지만 만약 테이블에 아주 많은 수의 row들이 있을 때는 이 두 가지 방법 간에 속도 차이가 날 수도 있습니다. 특히 SQL 문으로 데이터 조회 코드를 짜는 개발자의 경우에는 이런 부분까지도 신경써야 하죠. 지금 중요한 내용은 아니니까 자세한 설명은 생략할게요.  
+
+일단은 SQL에서 같은 결과를 얻기 위해서 여러 방법을 활용할 수 있다는 사실을 기억하고 넘어가시면 좋습니다.
