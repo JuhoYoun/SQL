@@ -408,3 +408,22 @@ END) AS obesity_check
 FROM
 (SELECT *, weight / ((height / 100) * (height / 100)) AS BMI FROM copang_main.member) AS subquery_for_BMI
 ORDER BY obesity_check ASC;
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+서브쿼리 중첩과 그 문제점
+* 서브쿼리 안에 서브쿼리를 또 쓰는 것을 서브쿼리 중첩이라한다
+
+SELECT 
+	i.id,
+	i.name,
+	AVG(star) AS avg_star,
+	COUNT(*) AS count_star
+FROM item AS i LEFT OUTER JOIN review AS r
+	ON r.item_id = i.id
+	LEFT OUTER JOIN member AS m
+	ON m.id = r.mem_id
+WHERE m.gender = 'f'
+GROUP BY i.id, i.name
+HAVING COUNT(*) >= 2
+ORDER BY AVG(star) DESC, COUNT(*) DESC;
+-> 이 전 챕터들에서 테이블 세개를 조인할 때 썼던 sql문
