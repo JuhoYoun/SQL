@@ -300,3 +300,39 @@ member 테이블의 세 번째 row를 생각하고 ,2~3번을 수행합니다.
 
 참고로 비상관 서브쿼리는 영어로 Non-correlated Subquery, 상관 서브쿼리는 영어로 Correlated Subquery라고 합니다.
 
+---------------------------------------------------------------------------------------------------------------
+
+리뷰가 있는 상품들의 가격 중에서
+
+최대 가격 / 리뷰의 평균 별점 / 리뷰를 남긴 고유한 회원 이메일의 수
+
+를 구하려고 하는데요.
+
+일단은
+
+(1) 이 세 테이블을 모두 이너 조인(inner join)하고, 거기서 price, star, email 컬럼만 조회하세요.
+
+(2) 그 SELECT 문을 derived table로 활용해보세요.
+
+(3) 그리고 derived table에는 copang_report(코팡 보고서)라는 alias를 붙여주세요. 
+
+(4) 조회하는 컬럼은 다음과 같은 3가지 컬럼일 텐데요. 각 컬럼에 아래와 같은 alias를 붙여주세요.
+
+1) MAX(copang_report.price) → max_price
+
+2) AVG(copang_report.star) → avg_star
+
+3) COUNT(DISTINCT(copang_report.email)) → distinct_email_count 
+
+
+SELECT 
+MAX(copang_report.price) AS max_price,
+AVG(copang_report.star) AS avg_star,
+COUNT(DISTINCT(copang_report.email)) AS distinct_email_count
+FROM
+(SELECT price, star, email
+FROM item AS i INNER JOIN review AS r
+ON i.id = r.item_id INNER JOIN member AS m
+ON m.id = r.mem_id) AS copang_report;
+------------------------------------------------------------------------------------------------------------------------------
+
