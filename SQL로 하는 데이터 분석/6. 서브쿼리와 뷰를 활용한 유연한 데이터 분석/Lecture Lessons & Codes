@@ -145,3 +145,30 @@ SELECT *
 FROM review
 WHERE item_id IN 
 (SELECT id FROM item WHERE YEAR(registration_date) < 2019);
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+지금까지 하나의 칼럼에 하나의 로우 또는 여러개의 로우를 리턴하는 서브쿼리들을 다뤘다
+다음에는 여러개의 칼럼에 여러개의 로우들을 리턴하는 경우들을 살펴 보자 (테이블 형태)
+
+FROM 절에 있는 서브쿼리
+
+SELECT 
+AVG(review_count),
+MAX(review_count),
+MIN(review_count)
+FROM
+(SELECT
+	SUBSTRING(address, 1, 2) AS region,
+	COUNT(*) AS review_count
+FROM review AS r LEFT OUTER JOIN member AS m
+ON r.mem_id = m.id
+GROUP BY SUBSTRING(address, 1, 2)
+HAVING 
+region IS NOT NULL
+AND region != '안드') AS review_count_summary;
+
+-> 괄호 안에 있는 테이블을 derived 테이블이라 한다. FROM 절의 derived 테이블은 항상 alias 를 설정해주어야한다 (안하면 에러)
+
+
+
