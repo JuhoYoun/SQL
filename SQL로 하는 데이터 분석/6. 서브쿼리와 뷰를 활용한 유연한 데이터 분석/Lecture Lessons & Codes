@@ -459,3 +459,5 @@ ORDER BY AVG(star) DESC, COUNT(*) DESC;
 ) AS final
 )
 ORDER BY AVG(star) DESC, COUNT(*) DESC;
+
+-> 서브쿼리를 중첩해서 구할 수 있지만 이 경우 복잡하고 같은 부분이 반복되는 등 헷갈리는 명령어가 된다
