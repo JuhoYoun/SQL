@@ -427,3 +427,35 @@ GROUP BY i.id, i.name
 HAVING COUNT(*) >= 2
 ORDER BY AVG(star) DESC, COUNT(*) DESC;
 -> 이 전 챕터들에서 테이블 세개를 조인할 때 썼던 sql문
+-> 이 상태에서 avg_star 값이 가장 큰 상품은 조회하고 싶다면?
+
+SELECT 
+	i.id,
+	i.name,
+	AVG(star) AS avg_star,
+	COUNT(*) AS count_star
+FROM item AS i LEFT OUTER JOIN review AS r
+	ON r.item_id = i.id
+	LEFT OUTER JOIN member AS m
+	ON m.id = r.mem_id
+WHERE m.gender = 'f'
+GROUP BY i.id, i.name
+HAVING COUNT(*) >= 2 AND avg_star =
+(
+SELECT MAX(avg_star) FROM (
+SELECT 
+	i.id,
+	i.name,
+	AVG(star) AS avg_star,
+	COUNT(*) AS count_star
+FROM item AS i LEFT OUTER JOIN review AS r
+	ON r.item_id = i.id
+	LEFT OUTER JOIN member AS m
+	ON m.id = r.mem_id
+WHERE m.gender = 'f'
+GROUP BY i.id, i.name
+HAVING COUNT(*) >= 2
+ORDER BY AVG(star) DESC, COUNT(*) DESC;
+) AS final
+)
+ORDER BY AVG(star) DESC, COUNT(*) DESC;
