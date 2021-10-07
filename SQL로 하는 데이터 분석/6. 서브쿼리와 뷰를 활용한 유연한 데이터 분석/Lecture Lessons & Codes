@@ -461,3 +461,34 @@ ORDER BY AVG(star) DESC, COUNT(*) DESC;
 ORDER BY AVG(star) DESC, COUNT(*) DESC;
 
 -> 서브쿼리를 중첩해서 구할 수 있지만 이 경우 복잡하고 같은 부분이 반복되는 등 헷갈리는 명령어가 된다
+
+뷰
+* 사용자가 원래의 테이블을 갖고 조인 등의 작업을 해서 만든 결과 테이블이 가상으로 저장된 형태
+* 새로운 쿼리 창을 열어 뷰를 저장하자!
+* 위의 예의 가장 안쪽의 테이블을 뷰로 저장해보자
+* 뷰는 테이블처럼 데이터베이스에 저장된다 -> VIEWS 탭 아래에 저장된다
+* 뷰는 가상 테이블이다 -> 뷰로 만든 가상 테이블을 원래 존재하는 테이블처럼 사용할 수 있다
+
+ex) 
+
+CREATE VIEW three_tables_joined AS 
+SELECT 
+	i.id,
+	i.name,
+	AVG(star) AS avg_star,
+	COUNT(*) AS count_star
+FROM item AS i LEFT OUTER JOIN review AS r
+	ON r.item_id = i.id
+	LEFT OUTER JOIN member AS m
+	ON m.id = r.mem_id
+WHERE m.gender = 'f'
+GROUP BY i.id, i.name
+HAVING COUNT(*) >= 2
+ORDER BY AVG(star) DESC, COUNT(*) DESC;
+
+-> 생성한 뷰를 이용해서 이전의 코드를 간단하게 쓸 수 있다
+
+SELECT * FROM copang_main.three_tables_joined
+WHERE avg_star = (
+	SELECT MAX(avg_star) FROM copang_main.three_tables_joined
+	);
