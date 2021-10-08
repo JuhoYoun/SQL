@@ -128,7 +128,7 @@ SELECT * FROM member
 
 	WHERE SUBSTRING(address, 1, 2) 
 
-=SELECT SUBSTRING(address, 1, 2) FROM member GROUP BY SUBSTRING(address, 1, 2) ORDER BY COUNT(*) DESC LIMIT 1;
+= (SELECT SUBSTRING(address, 1, 2) FROM member GROUP BY SUBSTRING(address, 1, 2) ORDER BY COUNT(*) DESC LIMIT 1);
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 퀴즈
